@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ contenido.titulo }}
+{% endblock %}
+
+{% block content %}
+<main class="contenido_acerca">
+  <section class="acerca_de_mi">
+    <!-- 📸 Imagen de perfil -->
+    <img src="{{ url_for('static', filename='imagen/FotoYo/Foto_Ricky.jpg') }}" alt="Foto de perfil" class="foto-perfil">
+
+    <!-- 🧍 Título -->
+    <h1 class="titulo-futurista">Acerca de mí</h1>
+
+    <!-- 📝 Texto de presentación -->
+    <p>
+      ¡Hola! Soy un apasionado desarrollador web con una fuerte inclinación hacia la creación de
+      experiencias interactivas, visualmente atractivas y funcionales. Me encanta combinar el diseño con
+      la lógica, buscando siempre que cada proyecto tenga un toque único y personal.
+    </p>
+
+    <p>
+      En mi tiempo libre disfruto de la música, la programación creativa y explorar nuevas tecnologías
+      que me permitan seguir creciendo profesionalmente. Este sitio es un reflejo de mi evolución como
+      desarrollador y de todo lo que disfruto crear.
+    </p>
+
+    <p>
+      Me motiva la idea de que cada línea de código pueda inspirar, enseñar o conectar a las personas.
+      Valoro la constancia, la curiosidad y la creatividad como pilares para construir soluciones que no
+      solo funcionen bien, sino que transmitan pasión y autenticidad. Siempre busco aprender algo nuevo,
+      mejorar en cada proyecto y aportar mi toque personal a todo lo que hago.
+    </p>
+
+    <!-- ✨ Frase inspiradora -->
+    <p class="frase-final">
+      “El código no solo resuelve problemas, también cuenta historias.”
+    </p>
+
+    <!-- 🎵 Sección musical desde YouTube -->
+    <div class="musica-youtube">
+      <h2>🎶 Mis canciones favoritas</h2>
+
+      <div class="videos-grid">
+        <!-- 🎧 I'm Still Standing -->
+        <div class="video-box">
+          <iframe width="360" height="215"
+            src="https://www.youtube.com/embed/ZHwVBirqD2s"
+            title="I'm Still Standing - Elton John"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+          <p>“I’m Still Standing” – Elton John</p>
+          <p class="creditos">
+            🎵 Todos los derechos pertenecen a Elton John y Universal Music Group.  
+            Este video se muestra solo con fines de inspiración y sin ánimo de lucro.
+          </p>
+        </div>
+
+        <!-- 🎤 I Will Survive -->
+        <div class="video-box">
+          <iframe width="360" height="215"
+            src="https://www.youtube.com/embed/6dYWe1c3OyU"
+            title="I Will Survive - Gloria Gaynor"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+          <p>“I Will Survive” – Gloria Gaynor</p>
+          <p class="creditos">
+            🎤 Derechos de autor pertenecen a Gloria Gaynor y Polydor Records.  
+            Este enlace se utiliza únicamente como referencia artística y cultural.
+          </p>
+        </div>
+
+        <!-- 🎸 I Was Made for Lovin' You -->
+        <div class="video-box">
+          <iframe width="360" height="215"
+            src="https://www.youtube.com/embed/ZhIsAZO5gl0"
+            title="I Was Made for Lovin' You - KISS"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+          <p>“I Was Made for Lovin’ You” – KISS</p>
+          <p class="creditos">
+            🎸 Derechos de autor de KISS y Casablanca Records.  
+            El contenido se presenta con fines ilustrativos y sin propósitos comerciales.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📍 Ubicación -->
+    <div class="ubicacion">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 2.25c-4.97 0-9 3.88-9 8.66 0 5.64 9 10.84 9 10.84s9-5.2 9-10.84c0-4.78-4.03-8.66-9-8.66z" />
+        <circle cx="12" cy="10.5" r="2.25" fill="currentColor" />
+      </svg>
+      <p>Colombia</p>
+    </div>
+  </section>
+</main>
+
+<!-- 💅 Estilos adicionales -->
+<style>
+  .musica-youtube {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .musica-youtube h2 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* 🎵 Cuadrícula adaptable */
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .video-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .video-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  }
+
+  .video-box p {
+    color: #ddd;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .video-box .creditos {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .foto-perfil {
+    border-radius: 50%;
+    max-width: 180px;
+    display: block;
+    margin: 1rem auto;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+
+  .titulo-futurista {
+    text-align: center;
+    color: #fff;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0f0;
+  }
+
+  .acerca_de_mi p {
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0.5rem auto;
+    text-align: center;
+  }
+
+  .frase-final {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #00ff88;
+    margin-top: 3rem;
+    text-shadow: 0 0 10px #00ffaa;
+  }
+
+  .ubicacion {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #aaa;
+  }
+
+  .ubicacion svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 768px) {
+    .videos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .video-box iframe {
+      width: 100%;
+      height: 200px;
+    }
+  }
+</style>
+{% endblock %}

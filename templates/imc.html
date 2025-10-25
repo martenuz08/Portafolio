@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Calculadora IMC{% endblock %}
+
+{% block content %}
+<section class="contenedor_imc">
+    <h2>Calculadora de IMC</h2>
+    <p>Introduce tu peso y altura para calcular tu índice de masa corporal.</p>
+
+    <form method="POST" action="{{ url_for('imc') }}" class="formulario_imc">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" step="0.1" name="peso" id="peso" required>
+
+        <label for="altura">Altura (m):</label>
+        <input type="number" step="0.01" name="altura" id="altura" required>
+
+        <button type="submit">Calcular IMC</button>
+    </form>
+
+    {% if imc %}
+    <div class="resultado_imc">
+        <h3>Tu IMC es: {{ imc }}</h3>
+        <p><strong>Resultado:</strong> {{ resultado }}</p>
+        <p><strong>Consejo:</strong> {{ consejo }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<style>
+.contenedor_imc {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    background: url("{{ url_for('static', filename='img/fondo_circuitos.jpg') }}") no-repeat center/cover;
+    min-height: 80vh;
+}
+
+.formulario_imc {
+    display: inline-block;
+    background: rgba(0,0,0,0.6);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.formulario_imc input {
+    display: block;
+    width: 200px;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.formulario_imc button {
+    background: #00bcd4;
+    border: none;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.formulario_imc button:hover {
+    background: #0097a7;
+}
+
+.resultado_imc {
+    margin-top: 2rem;
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 10px;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Portafolio{% endblock %}
+
+{% block content %}
+<div class="contenedor_principal">
+  <h2>Bienvenido al Dashboard</h2>
+  <p>Has iniciado sesión como: <strong>{{ email }}</strong></p>
+
+  <div class="contenedor_habilidades">
+    <div class="habilidad">
+      <h3>Perfil</h3>
+      <p>Correo: {{ email }}</p>
+      <p>Rol: 
+        {% if is_admin %}
+          <span style="color: yellow; font-weight: bold;">Administrador</span>
+        {% else %}
+          Usuario estándar
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="habilidad">
+      <h3>Acciones</h3>
+      <p>Puedes gestionar tu información, ver tus proyectos y acceder a funcionalidades adicionales.</p>
+      {% if is_admin %}
+        <p><a href="#" class="btm_contactar">Panel de Administración</a></p>
+      {% else %}
+        <p><a href="{{ url_for('proyecto') }}" class="btm_contactar">Ver Proyectos</a></p>
+      {% endif %}
+    </div>
+
+    <div class="habilidad">
+      <h3>Estado</h3>
+      <p>Tu sesión está activa. No olvides cerrarla cuando termines.</p>
+      <p><a href="{{ url_for('logout') }}" class="btm_contactar">Cerrar Sesión</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

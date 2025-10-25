@@ -1,0 +1,795 @@
+/* =========================================================
+   RESET Y BASE
+========================================================= */
+body {
+  background-image: url("../imagen/imagen.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: 0.5s;
+}
+
+a:hover,
+a:focus {
+  color: rgb(9, 187, 45);
+  transform: scale(1.2);
+  outline: none;
+}
+
+/* =========================================================
+   NAVBAR GENERAL
+========================================================= */
+.barra_navegacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #111;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* --- Menú Hamburguesa --- */
+.menu_hamburguesa {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* --- Menú Principal --- */
+.navegacion_principal {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  font-size: 20px;
+  gap: 20px;
+}
+
+.navegacion_principal a,
+.navegacion_principal span.usuario {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navegacion_principal a:hover {
+  color: #00ffcc;
+}
+
+/* --- Redes Sociales --- */
+.redes a {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover {
+  color: #00ffcc;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.fondo_header {
+  position: relative;
+  height: 500px;
+  background-image: url("../imagen/imagen.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.contenedor_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.titulo_principal {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+  margin: 40px auto 20px;
+  max-width: 90%;
+}
+
+.titulo_principal span {
+  text-transform: capitalize;
+  font-size: 36px;
+}
+
+.btm_contactar {
+  padding: 10px 80px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: rgb(9, 187, 45);
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: 0.9s;
+}
+
+.btm_contactar:hover,
+.btm_contactar:focus {
+  background-color: rgb(85, 8, 2);
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* =========================================================
+   CONTENEDORES Y TEXTOS
+========================================================= */
+.contenedor_principal {
+  margin-top: 100px;
+  text-align: center;
+}
+
+h2, h3 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.contenedor_habilidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.habilidad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: justify;
+  background-color: rgb(9, 187, 45);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.contenedor_icono {
+  padding: 20px;
+  border-radius: 50%;
+}
+
+/* =========================================================
+   SUSCRIPCIÓN
+========================================================= */
+.suscribirse div {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 80px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.suscribirse input[type="submit"] {
+  text-transform: uppercase;
+  background-color: rgb(9, 187, 45);
+  color: white;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.suscribirse input[type="submit"]:hover,
+.suscribirse input[type="submit"]:focus {
+  transform: scale(1.1);
+  outline: none;
+}
+
+.suscribirse #caja_email {
+  background-image: url("../si.png");
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: 20px;
+  padding: 10px 20px;
+  width: 95%;
+  margin-left: 10px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 50px;
+  font-size: 20px;
+  background-color: rgb(9, 187, 45);
+}
+
+/* =========================================================
+   TECNOLOGÍAS
+========================================================= */
+.tecnologias {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.tecnologias p {
+  border: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  border-radius: 8px;
+  margin: 0;
+  font-weight: bold;
+  transition: 0.3s ease;
+  color: white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.tecnologias p:hover,
+.tecnologias p:focus {
+  background-color: rgba(9, 187, 45, 0.9);
+  color: black;
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* =========================================================
+   FORMULARIOS (CONTACTO, LOGIN, REGISTRO)
+========================================================= */
+.formulario_contacto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+form {
+  background-color: #111;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: rgb(9, 187, 45);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  padding: 10px 0;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: rgb(85, 8, 2);
+  transform: scale(1.05);
+}
+
+/* --- Errores en formularios --- */
+input.error {
+  border: 2px solid #ff4d4d;
+  animation: shake 0.3s;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 15px;
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.form-link:hover {
+  color: rgb(9, 187, 45);
+}
+
+/* =========================================================
+   ACERCA DE MÍ
+========================================================= */
+.contenido_acerca {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.acerca_de_mi h1 {
+  font-size: 2.2em;
+  color: rgb(3, 250, 81);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.acerca_de_mi p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.foto-perfil {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 60%;
+  display: block;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================
+   EFECTOS Y ANIMACIONES ESPECIALES
+========================================================= */
+.titulo-futurista {
+  font-family: 'Lobster', cursive;
+  font-size: 5rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 10px #ff00ff,
+               0 0 20px #00ffff,
+               0 0 30px #ff00ff,
+               0 0 40px #00ffff;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+  to   { text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff; }
+}
+
+/* Ubicación con animación */
+.ubicacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #0f0, 0 0 30px #0ff;
+  animation: pulsoUbicacion 2s infinite alternate;
+}
+
+.ubicacion svg {
+  stroke: #0ff;
+  filter: drop-shadow(0 0 6px #0ff);
+  width: 30px;
+  height: 30px;
+}
+
+.ubicacion p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0f0;
+  margin: 0;
+}
+
+@keyframes pulsoUbicacion {
+  from { box-shadow: 0 0 10px #0f0, 0 0 20px #0ff; }
+  to   { box-shadow: 0 0 25px #ff00ff, 0 0 40px #0ff; }
+}
+
+/* =========================================================
+   APRENDIZAJE / CARDS
+========================================================= */
+.aprendizaje {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 20px;
+  padding: 20px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.aprendizaje .item {
+  background: #0fa909;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(114, 111, 111, 0.371);
+  transition: transform 0.2s ease-in-out;
+  color: #ffffff;
+}
+
+.aprendizaje .item:hover {
+  transform: scale(1.05);
+}
+
+.aprendizaje .item i {
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* =========================================================
+   PANEL DE USUARIO
+========================================================= */
+.mensaje-panel {
+    background-color: #00ff62;   /* Fondo gris claro */
+    border: 2px solid #5aa707;  /* Borde verde */
+    border-radius: 10px;        /* Esquinas redondeadas */
+    padding: 30px;              /* Espaciado interno */
+    margin: 30px auto;          /* Separación y centrado */
+    max-width: 800px;           /* Ancho máximo */
+    font-size: 18px;            /* Texto más grande */
+    text-align: center;         /* Centrado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombras */
+    line-height: 1.8;           /* Espaciado entre líneas */
+    color: #000000;                /* Texto oscuro para contraste */
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+@media (max-width: 768px) {
+  /* Navbar */
+  .menu_hamburguesa { display: block; }
+  .navegacion_principal {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 20px 0;
+    text-align: center;
+    gap: 15px;
+    z-index: 999;
+  }
+  .navegacion_principal.activo {
+    display: flex;
+    animation: slideDown 0.3s ease;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .aprendizaje { grid-template-columns: 1fr; }
+}
+
+/* Responsive más pequeño */
+@media (max-width: 420px) {
+  p {
+    font-size: 16px;
+    background-color: blue;
+    color: black;
+  }
+}
+
+/* ==============================
+   ESTILO CRONÓMETRO
+============================== */
+.cronometro-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid #00ff88;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 0 15px #00ff88;
+}
+
+#display {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff88;
+  letter-spacing: 3px;
+}
+
+.botones-cronometro button {
+  background-color: #00ff88;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.botones-cronometro button:hover {
+  background-color: #00ffaa;
+  transform: scale(1.05);
+}
+/* ==============================
+   ESTILO TARJETA DE PROYECTO
+============================== */
+.tarjeta-proyecto {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ff88;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 10px #00ff88;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-proyecto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00ffaa;
+}
+
+.tarjeta-proyecto h2 {
+  color: #00ff88;
+  font-family: 'Lobster', cursive;
+}
+
+.boton-proyecto {
+  display: inline-block;
+  background-color: #00ff88;
+  color: #000;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton-proyecto:hover {
+  background-color: #00ffaa;
+  transform: scale(1.05);
+}
+
+/* ==============================
+   CALENDARIO ACOPLADO AL FONDO
+===============================*/
+.calendario-body-acoplado {
+    background-image: url("../imagen/imagen.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.calendario-container-acoplado {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #00ff88;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,255,0,0.3);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.calendario-titulo-acoplado {
+    text-align: center;
+    font-size: 28px;
+    color: #00ff88;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Tabla full width y celdas acopladas */
+.calendario-tabla-acoplado {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* distribuye celdas uniformemente */
+    text-align: center;
+}
+
+.calendario-tabla-acoplado th,
+.calendario-tabla-acoplado td {
+    border: 1px solid #00ff88;
+    vertical-align: top;
+    padding: 6px;
+}
+
+.calendario-encabezado-acoplado {
+    background-color: rgba(0, 255, 136, 0.8);
+    color: black;
+    font-weight: bold;
+}
+
+.dia-celda-acoplado {
+    height: 100px;
+    position: relative;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.dia-celda-acoplado:hover {
+    background: rgba(0,255,136,0.2);
+}
+
+.dia-numero-acoplado {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #00ff88;
+}
+
+/* Eventos */
+.contenedor-eventos-acoplado {
+    margin-top: 3px;
+    max-height: 45px;
+    overflow-y: auto;
+}
+
+.evento-item-acoplado {
+    background-color: rgba(0,255,136,0.2);
+    color: #00ff88;
+    border-left: 3px solid #00ff88;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    text-align: left;
+}
+
+/* Formulario de eventos */
+.formulario-evento-acoplado input,
+.formulario-evento-acoplado textarea {
+    font-size: 11px;
+    padding: 3px 4px;
+    margin-top: 2px;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid #00ff88;
+    color: white;
+}
+
+.btn-agregar-acoplado {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    padding: 0;
+    bottom: 4px;
+    right: 4px;
+    background-color: #00ff88;
+    color: black;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
+.btn-agregar-acoplado:hover {
+    background-color: #00ffaa;
+}
+
+/* Día vacío */
+.dia-vacio-acoplado {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Navegación */
+.navegacion-mes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.navegacion-mes a {
+    color: #00ff88;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navegacion-mes a:hover {
+    color: white;
+}
+
+/* Scroll interno de eventos */
+.contenedor-eventos-acoplado::-webkit-scrollbar {
+    width: 5px;
+}
+.contenedor-eventos-acoplado::-webkit-scrollbar-thumb {
+    background-color: #00ff88;
+    border-radius: 3px;
+}
+
+/* ================================
+   BOTÓN DE AUDIO ACERCA DE MÍ
+================================ */
+.audio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.boton-audio {
+  background-color: rgb(9, 187, 45);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ff88;
+  transition: all 0.3s ease;
+}
+
+.boton-audio:hover {
+  background-color: rgb(85, 8, 2);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #00ffaa;
+}
+
+.boton-audio.reproduciendo {
+  background-color: #00ffaa;
+  color: black;
+}

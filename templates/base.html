@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Portafolio Aprendiz del SENA{% endblock %}</title>
+
+    <!-- Tu CSS principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" />
+
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Fuente de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    {% if session.get('user_id') %}
+    <!-- 🟢 SOLO SE MUESTRA SI EL USUARIO HA INICIADO SESIÓN -->
+    <header class="barra_navegacion">
+        <div class="menu_hamburguesa">
+            <span>&#9776;</span>
+        </div>
+
+        <nav class="navegacion_principal" id="menuPrincipal">
+            <a href="{{ url_for('inicio') }}">Inicio</a>
+            <a href="{{ url_for('acercademi') }}">Acerca de mí</a>
+            <a href="{{ url_for('proyecto') }}">Proyectos</a>
+
+            {% if session.get('is_admin') %}
+                <a href="{{ url_for('contactandome') }}">Contactándome</a>
+            {% else %}
+                <a href="{{ url_for('contacto') }}">Contacto</a>
+            {% endif %}
+
+            {% if session.get('email') %}
+                <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </nav>
+
+        <nav class="redes">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </nav>
+    </header>
+    {% endif %}
+
+    <!-- 🔹 Aquí se inyecta el contenido de las demás páginas -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if session.get('user_id') %}
+    <!-- 🟢 EL FOOTER TAMBIÉN SOLO SI EL USUARIO ESTÁ LOGUEADO -->
+    <footer class="centro">
+        <p>Todos los derechos reservados - Ricardo Castro &copy; 2025</p>
+    </footer>
+    {% endif %}
+
+    <script>
+        const menuHamburguesa = document.querySelector(".menu_hamburguesa span");
+        const navegacionPrincipal = document.querySelector(".navegacion_principal");
+
+        if (menuHamburguesa) {
+            menuHamburguesa.addEventListener("click", () => {
+                navegacionPrincipal.classList.toggle("activo");
+                menuHamburguesa.innerHTML = navegacionPrincipal.classList.contains("activo") ? "✖" : "☰";
+            });
+
+            document.querySelectorAll(".navegacion_principal a").forEach(link => {
+                link.addEventListener("click", () => {
+                    navegacionPrincipal.classList.remove("activo");
+                    menuHamburguesa.innerHTML = "☰";
+                });
+            });
+        }
+    </script>
+</body>
+</html>

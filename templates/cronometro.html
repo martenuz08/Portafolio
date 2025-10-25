@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Cronómetro{% endblock %}
+
+{% block content %}
+<main class="contenido_acerca">
+    <section class="acerca_de_mi">
+        <h1>Cronómetro</h1>
+
+        <div class="cronometro-container">
+            <div id="display">00:00:00</div>
+
+            <div class="botones-cronometro">
+                <button id="iniciar">Iniciar</button>
+                <button id="pausar">Pausar</button>
+                <button id="reiniciar">Reiniciar</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    let tiempo = 0;
+    let intervalo;
+    let enMarcha = false;
+
+    function actualizarDisplay() {
+        const horas = String(Math.floor(tiempo / 3600)).padStart(2, "0");
+        const minutos = String(Math.floor((tiempo % 3600) / 60)).padStart(2, "0");
+        const segundos = String(tiempo % 60).padStart(2, "0");
+        document.getElementById("display").textContent = `${horas}:${minutos}:${segundos}`;
+    }
+
+    document.getElementById("iniciar").addEventListener("click", () => {
+        if (!enMarcha) {
+            enMarcha = true;
+            intervalo = setInterval(() => {
+                tiempo++;
+                actualizarDisplay();
+            }, 1000);
+        }
+    });
+
+    document.getElementById("pausar").addEventListener("click", () => {
+        enMarcha = false;
+        clearInterval(intervalo);
+    });
+
+    document.getElementById("reiniciar").addEventListener("click", () => {
+        tiempo = 0;
+        actualizarDisplay();
+    });
+</script>
+{% endblock %}

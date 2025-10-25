@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Portafolio{% endblock %}
+
+{% block content %}
+{% if session.get('is_admin') %}
+<button id="edit-btn">Editar Página</button>
+<button id="save-btn" style="display:none;">Guardar Cambios</button>
+{% endif %}
+
+<div id="page-content">
+
+    <div class="fondo_header">
+        <div class="contenedor_header">
+            <header>
+                <h1 class="titulo-futurista editable" data-campo="titulo_header">
+                    Ricardo Castro - Aprendiz del SENA
+                </h1>
+            </header>
+
+            <div class="ubicacion">
+                <div>
+                    <!-- icono de ubicación -->
+                </div>
+                <p class="editable" data-campo="ubicacion_texto">Saravena - Arauca</p>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="aprendizaje">
+        <div class="item">
+            <i class="fa-brands fa-html5 fa-4x" style="color:#E44D26;"></i>
+            <p class="editable" data-campo="html_texto">
+                Comencé aprendiendo <strong>HTML</strong>, la base de toda página web, donde descubrí cómo estructurar títulos, párrafos, enlaces e imágenes. Gracias a él comprendí la importancia de una buena semántica para organizar el contenido de manera clara y accesible.
+            </p>
+        </div>
+
+        <div class="item">
+            <i class="fa-brands fa-css3-alt fa-4x" style="color:#264de4;"></i>
+            <p class="editable" data-campo="css_texto">
+                Después avancé con <strong>CSS</strong>, que me permitió dar estilo y vida a mis proyectos. Aprendí a manejar colores, tipografías, márgenes y posiciones, además de explorar flexbox y grid para crear diseños modernos y adaptables.
+            </p>
+        </div>
+
+        <div class="item">
+            <i class="fa-brands fa-python fa-4x" style="color:#3776AB;"></i>
+            <p class="editable" data-campo="python_texto">
+                Finalmente llegué a <strong>Python</strong>, un lenguaje versátil y poderoso con el que puedo automatizar tareas, manejar datos y desarrollar aplicaciones web. Es una herramienta clave que me abrió las puertas a la programación más avanzada.
+            </p>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-flask fa-4x" style="color:#8e44ad;"></i>
+            <p class="editable" data-campo="flask_texto">
+                Con <strong>Flask</strong> aprendí a crear aplicaciones web dinámicas usando Python. Me permitió comprender el funcionamiento de las rutas, formularios y la conexión entre el backend y el frontend de mis proyectos.
+            </p>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-code fa-4x" style="color:#f39c12;"></i>
+            <p class="editable" data-campo="jinja_texto">
+                Gracias a <strong>Jinja</strong> descubrí cómo integrar plantillas en mis aplicaciones Flask, utilizando variables, bucles y condiciones directamente en HTML para generar páginas dinámicas y reutilizables.
+            </p>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-database fa-4x" style="color:#00618A;"></i>
+            <p class="editable" data-campo="mysql_texto">
+                Con <strong>MySQL</strong> adquirí conocimientos en bases de datos relacionales, aprendiendo a diseñar tablas, realizar consultas y gestionar información. Esto me permitió almacenar usuarios, mensajes y datos de mis aplicaciones de manera segura y eficiente.
+            </p>
+        </div>
+    </section>
+</div>
+
+{% if session.get('is_admin') %}
+<script>
+const editBtn = document.getElementById("edit-btn");
+const saveBtn = document.getElementById("save-btn");
+
+editBtn.addEventListener("click", () => {
+    document.querySelectorAll(".editable").forEach(div => div.contentEditable = true);
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+});
+
+saveBtn.addEventListener("click", async () => {
+    const contenido = {};
+    document.querySelectorAll(".editable").forEach(div => {
+        contenido[div.dataset.campo] = div.innerHTML;
+    });
+
+    const response = await fetch("/admin/guardar_pagina", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+    pagina: "inicio",  // ← clave que debe coincidir con la base de datos
+    contenido: contenido
+})
+    });
+
+    if(response.ok){
+        alert("Cambios guardados correctamente!");
+        document.querySelectorAll(".editable").forEach(div => div.contentEditable = false);
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+    } else {
+        alert("Error al guardar cambios");
+    }
+});
+</script>
+{% endif %}
+
+{% endblock %}

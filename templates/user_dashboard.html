@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+
+{% block title %}Panel de Usuario{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <h2>Bienvenido,   {{ email }}</h2>
+
+  <div class="mensaje-panel">
+    <p><strong>Este es tu panel al haber ingresado como un usuario sin permisos.</strong></p>
+    <p><strong>Solo puedes seleccionar y observar la página sin poder hacer cambios, disfruta tu estadía en este formulario.
+    </strong></p>
+    <p><strong>PTTS: Selecciona las opciones: Inicio, Acerca de mi, Proyectos o Contacto, que se encuentran en la parte superior de la pagina, en el caso de contar con un celular desplazate al botón de las 3 lineas horizontales para poder encontrar las opciones mencionadas anteriormente para poder empezar a disfrutar tú experiencia en este lugar >:D</strong></p>
+  </div>
+{% endblock %}

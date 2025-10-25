@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+{% if session.get('is_admin') %}
+<button id="edit-btn">Editar Página</button>
+<button id="save-btn" style="display:none;">Guardar Cambios</button>
+{% endif %}
+
+<main id="page-content">
+    <h1 class="editable" data-campo="form_titulo">{{ contenido.form_titulo }}</h1>
+
+    <section class="formulario_contacto" id="contacto">
+        <form id="formContacto">
+            <label for="nombre" class="editable" data-campo="nombre_label">{{ contenido.nombre_label }}</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="telefono" class="editable" data-campo="telefono_label">{{ contenido.telefono_label }}</label>
+            <input type="tel" id="telefono" name="telefono">
+
+            <label for="email" class="editable" data-campo="email_label">{{ contenido.email_label }}</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje" class="editable" data-campo="mensaje_label">{{ contenido.mensaje_label }}</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+            <input type="submit" value="{{ contenido.boton_enviar }}" class="editable" data-campo="boton_enviar">
+        </form>
+
+        <p id="respuesta" style="margin-top: 10px; font-weight: bold;"></p>
+    </section>
+</main>
+
+{% if session.get('is_admin') %}
+<script>
+const editBtn = document.getElementById("edit-btn");
+const saveBtn = document.getElementById("save-btn");
+
+editBtn.addEventListener("click", () => {
+    document.querySelectorAll(".editable").forEach(el => el.contentEditable = true);
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+});
+
+saveBtn.addEventListener("click", async () => {
+    const contenido = {};
+    document.querySelectorAll(".editable").forEach(el => contenido[el.dataset.campo] = el.innerHTML);
+
+    const response = await fetch("/admin/guardar_pagina", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+    pagina: "inicio",  // ← clave que debe coincidir con la base de datos
+    contenido: contenido
+})
+    });
+
+
+    if(response.ok){
+        alert("Cambios guardados correctamente!");
+        document.querySelectorAll(".editable").forEach(el => el.contentEditable = false);
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+    } else {
+        alert("Error al guardar cambios");
+    }
+});
+</script>
+{% endif %}
+
+<script>
+document.getElementById("formContacto").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const datos = {
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        email: document.getElementById("email").value,
+        mensaje: document.getElementById("mensaje").value
+    };
+
+    try {
+        const respuesta = await fetch("{{ url_for('guardar_contacto') }}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        });
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok) {
+            document.getElementById("respuesta").innerText = "✅ " + "{{ contenido.respuesta_exito }}";
+            document.getElementById("respuesta").style.color = "green";
+            document.getElementById("formContacto").reset();
+        } else {
+            document.getElementById("respuesta").innerText = "❌ " + "{{ contenido.respuesta_error }}";
+            document.getElementById("respuesta").style.color = "red";
+        }
+    } catch (error) {
+        document.getElementById("respuesta").innerText = "⚠️ " + "{{ contenido.respuesta_servidor }}";
+        document.getElementById("respuesta").style.color = "orange";
+    }
+});
+</script>
+{% endblock %}

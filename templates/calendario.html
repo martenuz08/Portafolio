@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Calendario{% endblock %}
+
+{% block content %}
+<div class="calendario-container-acoplado">
+    <h2 class="calendario-titulo-acoplado">{{ nombre_mes }} {{ anio }}</h2>
+
+    <div class="navegacion-mes">
+        {% set mes_anterior = mes-1 if mes > 1 else 12 %}
+        {% set anio_anterior = anio-1 if mes == 1 else anio %}
+        {% set mes_siguiente = mes+1 if mes < 12 else 1 %}
+        {% set anio_siguiente = anio+1 if mes == 12 else anio %}
+        <a href="{{ url_for('calendario_view', mes=mes_anterior, anio=anio_anterior) }}">← Mes anterior</a>
+        <a href="{{ url_for('calendario_view', mes=mes_siguiente, anio=anio_siguiente) }}">Mes siguiente →</a>
+    </div>
+
+    <table class="calendario-tabla-acoplado">
+        <thead>
+            <tr class="calendario-encabezado-acoplado">
+                <th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for semana in cal %}
+            <tr>
+                {% for dia in semana %}
+                    {% if dia == 0 %}
+                        <td class="dia-vacio-acoplado"></td>
+                    {% else %}
+                        {% set fecha = anio|string + "-" + "%02d"|format(mes) + "-" + "%02d"|format(dia) %}
+                        {% set eventos_dia = [] %}
+                        {% for ev in eventos %}
+                            {% if ev['fecha'] == fecha %}
+                                {% set _ = eventos_dia.append(ev) %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <td class="dia-celda-acoplado {% if eventos_dia|length > 0 %}con-eventos{% endif %}">
+                            <div class="dia-numero-acoplado">{{ dia }}</div>
+
+                            <div class="contenedor-eventos-acoplado">
+                                {% for ev in eventos_dia %}
+                                    <div class="evento-item-acoplado">
+                                        <b>{{ ev['titulo'] }}</b><br>
+                                        <small>{{ ev['descripcion'] }}</small>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <form action="{{ url_for('agregar_evento') }}" method="POST" class="formulario-evento-acoplado">
+                                <input type="hidden" name="fecha" value="{{ fecha }}">
+                                <input type="text" name="titulo" placeholder="Título" required class="input-titulo-acoplado">
+                                <textarea name="descripcion" placeholder="Descripción" class="input-descripcion-acoplado"></textarea>
+                                <button type="submit" class="btn-agregar-acoplado">+</button>
+                            </form>
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

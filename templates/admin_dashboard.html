@@ -1,0 +1,40 @@
+{% extends "base.html" %} 
+
+{% block title %}Panel de Administrador{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <h2>Bienvenido Admin, {{ email }}</h2>
+  <p>Este es tu panel de control. Aquí puedes ver los mensajes de contacto hasta el momento en tu plataforma de solicitudes de contacto recibidos:</p>
+
+  {% if mensajes %}
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Mensaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in mensajes %}
+        <tr>
+          <td>{{ m.id }}</td>
+          <td>{{ m.nombre }}</td>
+          <td>{{ m.telefono }}</td>
+          <td>{{ m.email }}</td>
+          <td>{{ m.mensaje }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay mensajes aún.</p>
+  {% endif %}
+
+  <br>
+  <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar sesión</a>
+</div>
+{% endblock %}

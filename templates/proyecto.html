@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if session.get('is_admin') %}
+    <button id="edit-btn-title">Editar Título</button>
+    <button id="save-btn-title" style="display:none;">Guardar</button>
+{% endif %}
+{{ contenido.titulo_pagina }}
+{% endblock %}
+
+{% block content %}
+{% if session.get('is_admin') %}
+<button id="edit-btn">Editar Página</button>
+<button id="save-btn" style="display:none;">Guardar Cambios</button>
+{% endif %}
+
+<main class="contenido_acerca" id="page-content">
+    <section class="acerca_de_mi">
+        <h1 class="editable" data-campo="titulo_pagina">{{ contenido.titulo_pagina }}</h1>
+
+        <!-- Proyecto 1 -->
+        <div class="tarjeta-proyecto">
+            <h2 class="editable" data-campo="proyecto1_titulo">{{ contenido.proyecto1_titulo }}</h2>
+            <p class="editable" data-campo="proyecto1_texto">{{ contenido.proyecto1_texto }}</p>
+            <a href="{{ url_for('cronometro') }}" class="boton-proyecto editable" data-campo="proyecto1_boton">
+                Abrir {{ contenido.proyecto1_titulo }}
+            </a>
+        </div>
+
+        <!-- Proyecto 2 -->
+        <div class="tarjeta-proyecto">
+            <h2 class="editable" data-campo="proyecto2_titulo">{{ contenido.proyecto2_titulo }}</h2>
+            <p class="editable" data-campo="proyecto2_texto">{{ contenido.proyecto2_texto }}</p>
+            <a href="{{ url_for('imc') }}" class="boton-proyecto editable" data-campo="proyecto2_boton">
+                Abrir {{ contenido.proyecto2_titulo }}
+            </a>
+        </div>
+
+        <!-- Proyecto 3 -->
+        <div class="tarjeta-proyecto">
+            <h2 class="editable" data-campo="proyecto3_titulo">{{ contenido.proyecto3_titulo }}</h2>
+            <p class="editable" data-campo="proyecto3_texto">{{ contenido.proyecto3_texto }}</p>
+            <a href="{{ url_for('calendario_alias') }}" class="boton-proyecto editable" data-campo="proyecto3_boton">
+                Abrir {{ contenido.proyecto3_titulo }}
+            </a>
+        </div>
+    </section>
+</main>
+
+{% if session.get('is_admin') %}
+<script>
+const editBtn = document.getElementById("edit-btn");
+const saveBtn = document.getElementById("save-btn");
+
+editBtn.addEventListener("click", () => {
+    document.querySelectorAll(".editable").forEach(el => el.contentEditable = true);
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+});
+
+saveBtn.addEventListener("click", async () => {
+    const contenido = {};
+    document.querySelectorAll(".editable").forEach(el => contenido[el.dataset.campo] = el.innerHTML);
+
+    const response = await fetch("/admin/guardar_pagina", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+    pagina: "inicio",  // ← clave que debe coincidir con la base de datos
+    contenido: contenido
+})
+    });
+
+
+    if(response.ok){
+        alert("Cambios guardados correctamente!");
+        document.querySelectorAll(".editable").forEach(el => el.contentEditable = false);
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+    } else {
+        alert("Error al guardar cambios");
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

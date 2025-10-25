@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Contactándome{% endblock %}
+
+{% block content %}
+<section class="contenedor_contactos">
+    {% if session.get('is_admin') %}
+        <button id="edit-btn">Editar Mensaje de Bienvenida</button>
+        <button id="save-btn" style="display:none;">Guardar Cambios</button>
+        <p class="editable" data-campo="mensaje_bienvenida" id="mensaje-bienvenida">BIENVENIDO ADMIN, {{ email | upper }}</p>
+    {% else %}
+        <p>BIENVENIDO ADMIN, {{ email | upper }}</p>
+    {% endif %}
+
+    <p>Estos son los mensajes recibidos hasta el momento:</p>
+
+    <table class="tabla_contactos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>TELÉFONO</th>
+                <th>EMAIL</th>
+                <th>MENSAJE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mensaje in mensajes %}
+            <tr>
+                <td>{{ mensaje.id }}</td>
+                <td>{{ mensaje.nombre }}</td>
+                <td>{{ mensaje.telefono }}</td>
+                <td>{{ mensaje.email }}</td>
+                <td>{{ mensaje.mensaje }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<style>
+.contenedor_contactos {
+    text-align: center;
+    padding: 2rem;
+    color: white;
+    background: url("{{ url_for('static', filename='img/fondo_circuitos.jpg') }}") no-repeat center/cover;
+    min-height: 80vh;
+}
+
+.tabla_contactos {
+    margin: 2rem auto;
+    border-collapse: collapse;
+    width: 90%;
+    background: rgba(0,0,0,0.6);
+}
+
+.tabla_contactos th, .tabla_contactos td {
+    border: 1px solid #fff;
+    padding: 0.75rem;
+    color: white;
+}
+
+.tabla_contactos th {
+    background: #111;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tabla_contactos tr:hover {
+    background: rgba(255,255,255,0.1);
+}
+</style>
+
+{% if session.get('is_admin') %}
+<script>
+const editBtn = document.getElementById("edit-btn");
+const saveBtn = document.getElementById("save-btn");
+
+editBtn.addEventListener("click", () => {
+    document.getElementById("mensaje-bienvenida").contentEditable = true;
+    editBtn.style.display = "none";
+    saveBtn.style.display = "inline-block";
+});
+
+saveBtn.addEventListener("click", async () => {
+    const contenido = { mensaje_bienvenida: document.getElementById("mensaje-bienvenida").innerHTML };
+
+    const response = await fetch("/admin/guardar_pagina", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+    pagina: "inicio",  // ← clave que debe coincidir con la base de datos
+    contenido: contenido
+})
+    });
+
+
+    if(response.ok){
+        alert("Mensaje guardado correctamente!");
+        document.getElementById("mensaje-bienvenida").contentEditable = false;
+        saveBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+    } else {
+        alert("Error al guardar mensaje");
+    }
+});
+</script>
+{% endif %}
+{% endblock %}
